@@ -25,5 +25,6 @@ namespace PlatformTestApplication.Data
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Customer> Customers { get; set; }
     }
 }

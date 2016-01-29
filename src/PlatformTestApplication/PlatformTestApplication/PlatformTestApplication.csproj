@@ -90,6 +90,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AuroraModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Data\Customer.cs">
+      <DependentUpon>AuroraModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
