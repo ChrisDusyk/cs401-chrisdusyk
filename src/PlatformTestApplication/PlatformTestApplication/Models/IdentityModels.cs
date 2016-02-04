@@ -25,7 +25,7 @@ namespace PlatformTestApplication.Models
 			Database.SetInitializer(new MySqlInitializer());
 		}
 
-		public ApplicationDbContext() : base("DefaultConnection")
+		public ApplicationDbContext() : base("AuroraContext")
 		{
 
 		}

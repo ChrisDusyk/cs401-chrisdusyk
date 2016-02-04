@@ -17,14 +17,14 @@ namespace PlatformTestApplication.Models
 			}
 			else
 			{
-				var migrationHistoryTableExists = ((IObjectContextAdapter)context).ObjectContext.ExecuteStoreQuery<int>(
-					string.Format("SELECT COUNT(*) FROM information_schemas.tables WHERE table_schema = '{0}' AND table_name = '__MigrationHistory'", ""));
+				//var migrationHistoryTableExists = ((IObjectContextAdapter)context).ObjectContext.ExecuteStoreQuery<int>(
+				//	string.Format("SELECT COUNT(*) FROM information_schemas.tables WHERE table_schema = '{0}' AND table_name = '__MigrationHistory'", ""));
 
-				if (migrationHistoryTableExists.FirstOrDefault() == 0)
-				{
-					context.Database.Delete();
-					context.Database.Create();
-				}
+				//if (migrationHistoryTableExists.FirstOrDefault() == 0)
+				//{
+				//	context.Database.Delete();
+				//	context.Database.Create();
+				//}
 			}
 		}
 	}

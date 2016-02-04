@@ -225,6 +225,10 @@
     <Compile Include="Migrations\201602040242205_InitialCreate2.Designer.cs">
       <DependentUpon>201602040242205_InitialCreate2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602040307090_InitialCreate3.cs" />
+    <Compile Include="Migrations\201602040307090_InitialCreate3.Designer.cs">
+      <DependentUpon>201602040307090_InitialCreate3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AuroraContext.cs" />
@@ -313,7 +317,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\EFModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -332,6 +335,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602040242205_InitialCreate2.resx">
       <DependentUpon>201602040242205_InitialCreate2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602040307090_InitialCreate3.resx">
+      <DependentUpon>201602040307090_InitialCreate3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
