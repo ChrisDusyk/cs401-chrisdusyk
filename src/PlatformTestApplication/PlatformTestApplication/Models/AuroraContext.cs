@@ -1,6 +1,8 @@
 namespace PlatformTestApplication.Models
 {
 	using System.Data.Entity;
+	using System.Data.Entity.ModelConfiguration;
+	using System.Linq;
 
 	public partial class AuroraContext : DbContext
 	{
@@ -10,6 +12,12 @@ namespace PlatformTestApplication.Models
 		}
 
 		public virtual DbSet<Customer> Customers { get; set; }
+
+		public virtual DbSet<Product> Products { get; set; }
+
+		public virtual DbSet<CustomerProduct> CustomerProducts { get; set; }
+
+		public virtual DbSet<Employee> Employees { get; set; }
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
@@ -32,6 +40,18 @@ namespace PlatformTestApplication.Models
 			modelBuilder.Entity<Customer>()
 				.Property(e => e.PostalCode)
 				.IsUnicode(false);
+
+			modelBuilder.Entity<CustomerProduct>()
+				.HasRequired(cp => cp.Customer)
+				.WithMany(c => c.CustomerProducts)
+				.HasForeignKey(cp => cp.CustomerID)
+				.WillCascadeOnDelete(false);
+
+			modelBuilder.Entity<CustomerProduct>()
+				.HasRequired(cp => cp.SalesPerson)
+				.WithMany(e => e.SoldProducts)
+				.HasForeignKey(cp => cp.SalesPersonID)
+				.WillCascadeOnDelete(false);
 		}
 	}
 }
