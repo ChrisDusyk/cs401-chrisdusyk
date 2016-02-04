@@ -217,10 +217,23 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602040239169_InitialCreate.cs" />
+    <Compile Include="Migrations\201602040239169_InitialCreate.Designer.cs">
+      <DependentUpon>201602040239169_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602040242205_InitialCreate2.cs" />
+    <Compile Include="Migrations\201602040242205_InitialCreate2.Designer.cs">
+      <DependentUpon>201602040242205_InitialCreate2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AuroraContext.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MySqlConfiguration.cs" />
     <Compile Include="Models\MySqlHistoryContext.cs" />
+    <Compile Include="Models\MySqlInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -312,6 +325,14 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201602040239169_InitialCreate.resx">
+      <DependentUpon>201602040239169_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602040242205_InitialCreate2.resx">
+      <DependentUpon>201602040242205_InitialCreate2.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
