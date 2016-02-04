@@ -6,8 +6,7 @@ namespace PlatformTestApplication.Models
 
 	public partial class AuroraContext : DbContext
 	{
-		public AuroraContext()
-			: base("name=AuroraContext")
+		public AuroraContext() : base("name=AuroraContext")
 		{
 		}
 
@@ -41,11 +40,11 @@ namespace PlatformTestApplication.Models
 				.Property(e => e.PostalCode)
 				.IsUnicode(false);
 
-			modelBuilder.Entity<CustomerProduct>()
-				.HasRequired(cp => cp.Customer)
-				.WithMany(c => c.CustomerProducts)
-				.HasForeignKey(cp => cp.CustomerID)
-				.WillCascadeOnDelete(false);
+			//modelBuilder.Entity<CustomerProduct>()
+			//	.HasRequired(cp => cp.Customer)
+			//	.WithMany(c => c.CustomerProducts)
+			//	.HasForeignKey(cp => cp.CustomerID)
+			//	.WillCascadeOnDelete(false);
 
 			modelBuilder.Entity<CustomerProduct>()
 				.HasRequired(cp => cp.SalesPerson)

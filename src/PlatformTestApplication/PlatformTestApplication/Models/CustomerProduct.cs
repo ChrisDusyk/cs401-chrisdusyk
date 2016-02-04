@@ -23,7 +23,7 @@ namespace PlatformTestApplication.Models
 		[ForeignKey("SalesPersonID")]
 		public virtual Employee SalesPerson { get; set; }
 
-		[ForeignKey("CustomerID")]
+		//[ForeignKey("CustomerID")]
 		public virtual Customer Customer { get; set; }
 	}
 }
