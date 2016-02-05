@@ -217,34 +217,39 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201602040239169_InitialCreate.cs" />
-    <Compile Include="Migrations\201602040239169_InitialCreate.Designer.cs">
-      <DependentUpon>201602040239169_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602040242205_InitialCreate2.cs" />
-    <Compile Include="Migrations\201602040242205_InitialCreate2.Designer.cs">
-      <DependentUpon>201602040242205_InitialCreate2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602040307090_InitialCreate3.cs" />
-    <Compile Include="Migrations\201602040307090_InitialCreate3.Designer.cs">
-      <DependentUpon>201602040307090_InitialCreate3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602040449264_WorkonDataModelAndSeed.cs" />
-    <Compile Include="Migrations\201602040449264_WorkonDataModelAndSeed.Designer.cs">
-      <DependentUpon>201602040449264_WorkonDataModelAndSeed.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AuroraContext.cs" />
-    <Compile Include="Models\Customer.cs" />
-    <Compile Include="Models\CustomerProduct.cs" />
-    <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\AuroraDataEntity.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AuroraDataEntity.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AuroraDataEntity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AuroraDataEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AuroraDataEntity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AuroraDataEntity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>AuroraDataEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerProduct.cs">
+      <DependentUpon>AuroraDataEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Employee.cs">
+      <DependentUpon>AuroraDataEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MySqlConfiguration.cs" />
     <Compile Include="Models\MySqlHistoryContext.cs" />
     <Compile Include="Models\MySqlInitializer.cs" />
-    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Product.cs">
+      <DependentUpon>AuroraDataEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -257,6 +262,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\AuroraDataEntity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AuroraDataEntity.edmx</DependentUpon>
+      <LastGenOutput>AuroraDataEntity.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\AuroraDataEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AuroraDataEntity.edmx</DependentUpon>
+      <LastGenOutput>AuroraDataEntity.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -270,6 +285,13 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <EntityDeploy Include="Models\AuroraDataEntity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AuroraDataEntity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\AuroraDataEntity.edmx.diagram">
+      <DependentUpon>AuroraDataEntity.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -337,20 +359,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201602040239169_InitialCreate.resx">
-      <DependentUpon>201602040239169_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602040242205_InitialCreate2.resx">
-      <DependentUpon>201602040242205_InitialCreate2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602040307090_InitialCreate3.resx">
-      <DependentUpon>201602040307090_InitialCreate3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602040449264_WorkonDataModelAndSeed.resx">
-      <DependentUpon>201602040449264_WorkonDataModelAndSeed.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
