@@ -240,6 +240,8 @@
     <Compile Include="Models\CustomerProduct.cs">
       <DependentUpon>AuroraDataEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CustomerProductViewModel.cs" />
+    <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\Employee.cs">
       <DependentUpon>AuroraDataEntity.tt</DependentUpon>
     </Compile>
