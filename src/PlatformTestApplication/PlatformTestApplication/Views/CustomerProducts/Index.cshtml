@@ -1,0 +1,51 @@
+﻿@model IEnumerable<PlatformTestApplication.Models.CustomerProduct>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SoldDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.ProductCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.CustomerName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoldDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.ProductCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.CustomerName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CustomerProductID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CustomerProductID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CustomerProductID })
+        </td>
+    </tr>
+}
+
+</table>
