@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Chris.Dusyk\Documents\GitHub\cs401-200268705\src\AzureWebAppComponent\AzureWebAppComponent\Models\AuroraContext.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Code\cs401-200268705\src\AzureWebAppComponent\AzureWebAppComponent\Models\AuroraContext.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
