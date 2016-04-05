@@ -12,21 +12,22 @@ namespace AzureApiComponent.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Employee
+    public partial class Order
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Employee()
+        public Order()
         {
-            this.Orders = new HashSet<Order>();
+            this.OrderProducts = new HashSet<OrderProduct>();
         }
     
-        public int EmployeeID { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public string AspNetUserID { get; set; }
+        public int OrderId { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public Nullable<int> CustomerId { get; set; }
+        public Nullable<int> SoldById { get; set; }
     
+        public virtual Customer Customer { get; set; }
+        public virtual Employee Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<OrderProduct> OrderProducts { get; set; }
     }
 }

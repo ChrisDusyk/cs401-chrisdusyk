@@ -17,7 +17,7 @@ namespace AzureApiComponent.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            this.CustomerProducts = new HashSet<CustomerProduct>();
+            this.OrderProducts = new HashSet<OrderProduct>();
         }
     
         public int ProductID { get; set; }
@@ -25,6 +25,6 @@ namespace AzureApiComponent.Models
         public string ProductName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CustomerProduct> CustomerProducts { get; set; }
+        public virtual ICollection<OrderProduct> OrderProducts { get; set; }
     }
 }

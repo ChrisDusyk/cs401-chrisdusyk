@@ -12,16 +12,13 @@ namespace AzureApiComponent.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CustomerProduct
+    public partial class OrderProduct
     {
-        public int CustomerProductID { get; set; }
-        public Nullable<int> ProductID { get; set; }
-        public Nullable<int> SoldByID { get; set; }
-        public Nullable<int> CustomerID { get; set; }
-        public Nullable<System.DateTime> SoldDate { get; set; }
+        public int Id { get; set; }
+        public Nullable<int> OrderId { get; set; }
+        public Nullable<int> ProductId { get; set; }
     
+        public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }
-        public virtual Employee Employee { get; set; }
-        public virtual Customer Customer { get; set; }
     }
 }
