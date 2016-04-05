@@ -25,9 +25,10 @@ namespace AzureWebAppComponent.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CustomerProduct> CustomerProducts { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<OrderProduct> OrderProducts { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
     }
 }

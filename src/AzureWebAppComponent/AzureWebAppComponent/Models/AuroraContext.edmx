@@ -5,16 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="CS401_DBModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="CustomerProducts">
-          <Key>
-            <PropertyRef Name="CustomerProductID" />
-          </Key>
-          <Property Name="CustomerProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ProductID" Type="int" />
-          <Property Name="SoldByID" Type="int" />
-          <Property Name="CustomerID" Type="int" />
-          <Property Name="SoldDate" Type="datetime" Precision="0" />
-        </EntityType>
         <EntityType Name="Customers">
           <Key>
             <PropertyRef Name="CustomerID" />
@@ -36,6 +26,23 @@
           <Property Name="Email" Type="varchar" MaxLength="100" />
           <Property Name="AspNetUserID" Type="varchar" MaxLength="128" />
         </EntityType>
+        <EntityType Name="OrderProducts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="int" />
+          <Property Name="ProductId" Type="int" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="SoldById" Type="int" />
+        </EntityType>
         <EntityType Name="Products">
           <Key>
             <PropertyRef Name="ProductID" />
@@ -44,77 +51,81 @@
           <Property Name="ProductCode" Type="varchar" MaxLength="5" />
           <Property Name="ProductName" Type="varchar" MaxLength="200" />
         </EntityType>
-        <Association Name="CustomerProducts_ibfk_1">
+        <Association Name="OrderProducts_Orders_OrderId_fk">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="OrderProducts" Type="Self.OrderProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderProducts">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrderProducts_Products_ProductID_fk">
           <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
-          <End Role="CustomerProducts" Type="Self.CustomerProducts" Multiplicity="*" />
+          <End Role="OrderProducts" Type="Self.OrderProducts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Products">
               <PropertyRef Name="ProductID" />
             </Principal>
-            <Dependent Role="CustomerProducts">
-              <PropertyRef Name="ProductID" />
+            <Dependent Role="OrderProducts">
+              <PropertyRef Name="ProductId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="CustomerProducts_ibfk_2">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
-          <End Role="CustomerProducts" Type="Self.CustomerProducts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employees">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="CustomerProducts">
-              <PropertyRef Name="SoldByID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="CustomerProducts_ibfk_3">
+        <Association Name="Orders_Customers_CustomerID_fk">
           <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
-          <End Role="CustomerProducts" Type="Self.CustomerProducts" Multiplicity="*" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customers">
               <PropertyRef Name="CustomerID" />
             </Principal>
-            <Dependent Role="CustomerProducts">
-              <PropertyRef Name="CustomerID" />
+            <Dependent Role="Orders">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Orders_Employees_EmployeeID_fk">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="SoldById" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="CS401_DBModelStoreContainer">
-          <EntitySet Name="CustomerProducts" EntityType="Self.CustomerProducts" Schema="CS401_DB" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="CS401_DB" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="CS401_DB" store:Type="Tables" />
+          <EntitySet Name="OrderProducts" EntityType="Self.OrderProducts" Schema="CS401_DB" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="CS401_DB" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="CS401_DB" store:Type="Tables" />
-          <AssociationSet Name="CustomerProducts_ibfk_1" Association="Self.CustomerProducts_ibfk_1">
+          <AssociationSet Name="OrderProducts_Orders_OrderId_fk" Association="Self.OrderProducts_Orders_OrderId_fk">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderProducts" EntitySet="OrderProducts" />
+          </AssociationSet>
+          <AssociationSet Name="OrderProducts_Products_ProductID_fk" Association="Self.OrderProducts_Products_ProductID_fk">
             <End Role="Products" EntitySet="Products" />
-            <End Role="CustomerProducts" EntitySet="CustomerProducts" />
+            <End Role="OrderProducts" EntitySet="OrderProducts" />
           </AssociationSet>
-          <AssociationSet Name="CustomerProducts_ibfk_2" Association="Self.CustomerProducts_ibfk_2">
-            <End Role="Employees" EntitySet="Employees" />
-            <End Role="CustomerProducts" EntitySet="CustomerProducts" />
-          </AssociationSet>
-          <AssociationSet Name="CustomerProducts_ibfk_3" Association="Self.CustomerProducts_ibfk_3">
+          <AssociationSet Name="Orders_Customers_CustomerID_fk" Association="Self.Orders_Customers_CustomerID_fk">
             <End Role="Customers" EntitySet="Customers" />
-            <End Role="CustomerProducts" EntitySet="CustomerProducts" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="Orders_Employees_EmployeeID_fk" Association="Self.Orders_Employees_EmployeeID_fk">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CS401_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="CustomerProduct">
-          <Key>
-            <PropertyRef Name="CustomerProductID" />
-          </Key>
-          <Property Name="CustomerProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductID" Type="Int32" />
-          <Property Name="SoldByID" Type="Int32" />
-          <Property Name="CustomerID" Type="Int32" />
-          <Property Name="SoldDate" Type="DateTime" />
-          <NavigationProperty Name="Product" Relationship="Self.CustomerProducts_ibfk_1" FromRole="CustomerProducts" ToRole="Products" />
-          <NavigationProperty Name="Employee" Relationship="Self.CustomerProducts_ibfk_2" FromRole="CustomerProducts" ToRole="Employees" />
-          <NavigationProperty Name="Customer" Relationship="Self.CustomerProducts_ibfk_3" FromRole="CustomerProducts" ToRole="Customers" />
-        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="CustomerID" />
@@ -125,7 +136,7 @@
           <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Province" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="PostalCode" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="CustomerProducts" Relationship="Self.CustomerProducts_ibfk_3" FromRole="Customers" ToRole="CustomerProducts" />
+          <NavigationProperty Name="Orders" Relationship="CS401_DBModel.Orders_Customers_CustomerID_fk" FromRole="Customer" ToRole="Order" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -136,7 +147,7 @@
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="AspNetUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="CustomerProducts" Relationship="Self.CustomerProducts_ibfk_2" FromRole="Employees" ToRole="CustomerProducts" />
+          <NavigationProperty Name="Orders" Relationship="CS401_DBModel.Orders_Employees_EmployeeID_fk" FromRole="Employee" ToRole="Order" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -145,79 +156,107 @@
           <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductCode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="ProductName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="CustomerProducts" Relationship="Self.CustomerProducts_ibfk_1" FromRole="Products" ToRole="CustomerProducts" />
+          <NavigationProperty Name="OrderProducts" Relationship="CS401_DBModel.OrderProducts_Products_ProductID_fk" FromRole="Product" ToRole="OrderProduct" />
         </EntityType>
-        <Association Name="CustomerProducts_ibfk_1">
-          <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
-          <End Role="CustomerProducts" Type="Self.CustomerProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Products">
-              <PropertyRef Name="ProductID" />
-            </Principal>
-            <Dependent Role="CustomerProducts">
-              <PropertyRef Name="ProductID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="CustomerProducts_ibfk_2">
-          <End Role="Employees" Type="Self.Employee" Multiplicity="0..1" />
-          <End Role="CustomerProducts" Type="Self.CustomerProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employees">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="CustomerProducts">
-              <PropertyRef Name="SoldByID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="CustomerProducts_ibfk_3">
-          <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="CustomerProducts" Type="Self.CustomerProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customers">
-              <PropertyRef Name="CustomerID" />
-            </Principal>
-            <Dependent Role="CustomerProducts">
-              <PropertyRef Name="CustomerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="CS401_DBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="CustomerProducts" EntityType="Self.CustomerProduct" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Employees" EntityType="Self.Employee" />
           <EntitySet Name="Products" EntityType="Self.Product" />
-          <AssociationSet Name="CustomerProducts_ibfk_1" Association="Self.CustomerProducts_ibfk_1">
-            <End Role="Products" EntitySet="Products" />
-            <End Role="CustomerProducts" EntitySet="CustomerProducts" />
+          <EntitySet Name="OrderProducts" EntityType="CS401_DBModel.OrderProduct" />
+          <EntitySet Name="Orders" EntityType="CS401_DBModel.Order" />
+          <AssociationSet Name="Orders_Customers_CustomerID_fk" Association="CS401_DBModel.Orders_Customers_CustomerID_fk">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="CustomerProducts_ibfk_2" Association="Self.CustomerProducts_ibfk_2">
-            <End Role="Employees" EntitySet="Employees" />
-            <End Role="CustomerProducts" EntitySet="CustomerProducts" />
+          <AssociationSet Name="Orders_Employees_EmployeeID_fk" Association="CS401_DBModel.Orders_Employees_EmployeeID_fk">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="CustomerProducts_ibfk_3" Association="Self.CustomerProducts_ibfk_3">
-            <End Role="Customers" EntitySet="Customers" />
-            <End Role="CustomerProducts" EntitySet="CustomerProducts" />
+          <AssociationSet Name="OrderProducts_Orders_OrderId_fk" Association="CS401_DBModel.OrderProducts_Orders_OrderId_fk">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderProduct" EntitySet="OrderProducts" />
+          </AssociationSet>
+          <AssociationSet Name="OrderProducts_Products_ProductID_fk" Association="CS401_DBModel.OrderProducts_Products_ProductID_fk">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="OrderProduct" EntitySet="OrderProducts" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="OrderProduct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" />
+          <NavigationProperty Name="Order" Relationship="CS401_DBModel.OrderProducts_Orders_OrderId_fk" FromRole="OrderProduct" ToRole="Order" />
+          <NavigationProperty Name="Product" Relationship="CS401_DBModel.OrderProducts_Products_ProductID_fk" FromRole="OrderProduct" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="SoldById" Type="Int32" />
+          <NavigationProperty Name="Customer" Relationship="CS401_DBModel.Orders_Customers_CustomerID_fk" FromRole="Order" ToRole="Customer" />
+          <NavigationProperty Name="Employee" Relationship="CS401_DBModel.Orders_Employees_EmployeeID_fk" FromRole="Order" ToRole="Employee" />
+          <NavigationProperty Name="OrderProducts" Relationship="CS401_DBModel.OrderProducts_Orders_OrderId_fk" FromRole="Order" ToRole="OrderProduct" />
+        </EntityType>
+        <Association Name="Orders_Customers_CustomerID_fk">
+          <End Type="CS401_DBModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="CS401_DBModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Orders_Employees_EmployeeID_fk">
+          <End Type="CS401_DBModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="CS401_DBModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="SoldById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrderProducts_Orders_OrderId_fk">
+          <End Type="CS401_DBModel.Order" Role="Order" Multiplicity="0..1" />
+          <End Type="CS401_DBModel.OrderProduct" Role="OrderProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderProduct">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrderProducts_Products_ProductID_fk">
+          <End Type="CS401_DBModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="CS401_DBModel.OrderProduct" Role="OrderProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="OrderProduct">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="CS401_DBModelStoreContainer" CdmEntityContainer="CS401_DBEntities">
-          <EntitySetMapping Name="CustomerProducts">
-            <EntityTypeMapping TypeName="CS401_DBModel.CustomerProduct">
-              <MappingFragment StoreEntitySet="CustomerProducts">
-                <ScalarProperty Name="CustomerProductID" ColumnName="CustomerProductID" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="SoldByID" ColumnName="SoldByID" />
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="SoldDate" ColumnName="SoldDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="CS401_DBModel.Customer">
               <MappingFragment StoreEntitySet="Customers">
@@ -247,6 +286,25 @@
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderProducts">
+            <EntityTypeMapping TypeName="CS401_DBModel.OrderProduct">
+              <MappingFragment StoreEntitySet="OrderProducts">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="CS401_DBModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="SoldById" ColumnName="SoldById" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

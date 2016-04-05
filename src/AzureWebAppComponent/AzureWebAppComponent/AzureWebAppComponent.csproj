@@ -203,9 +203,6 @@
     <Compile Include="Models\Customer.cs">
       <DependentUpon>AuroraContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CustomerProduct.cs">
-      <DependentUpon>AuroraContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Employee.cs">
       <DependentUpon>AuroraContext.tt</DependentUpon>
     </Compile>
@@ -214,6 +211,12 @@
     <Compile Include="Models\MySqlConfiguration.cs" />
     <Compile Include="Models\MySqlHistoryContext.cs" />
     <Compile Include="Models\MySqlInitializer.cs" />
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>AuroraContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderProduct.cs">
+      <DependentUpon>AuroraContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Product.cs">
       <DependentUpon>AuroraContext.tt</DependentUpon>
     </Compile>
