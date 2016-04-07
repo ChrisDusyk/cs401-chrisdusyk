@@ -3,7 +3,14 @@
   <Role name="CS401WebApp">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=cs401webapp;AccountKey=5QTcM5EigiJD1nvwlW8CPhScf8JzSZz/mjU8xhEiJFJ0xyOLJC2XjPC6KOrW5TlBLpup8cA+FJlgc0DkEPL+RQ==" />
+    </ConfigurationSettings>
+  </Role>
+  <Role name="OrderProcessingRole">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=cs401webapp;AccountKey=5QTcM5EigiJD1nvwlW8CPhScf8JzSZz/mjU8xhEiJFJ0xyOLJC2XjPC6KOrW5TlBLpup8cA+FJlgc0DkEPL+RQ==" />
+      <Setting name="Microsoft.ServiceBus.ConnectionString" value="Endpoint=sb://cs401queue-ns.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=9Og0KLwwAWspewHWzKvSS86qKGJsNbeouyEHi2TKovc=" />
     </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>

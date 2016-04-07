@@ -45,12 +45,26 @@
       <RoleName>CS401WebApp</RoleName>
       <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
     </ProjectReference>
+    <ProjectReference Include="..\OrderProcessingRole\OrderProcessingRole.csproj">
+      <Name>OrderProcessingRole</Name>
+      <Project>{bf8cb172-ea2d-48ea-b2fe-2f76d19e6c49}</Project>
+      <Private>True</Private>
+      <RoleType>Worker</RoleType>
+      <RoleName>OrderProcessingRole</RoleName>
+      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CS401WebAppContent\" />
+    <Folder Include="OrderProcessingRoleContent\" />
+    <Folder Include="Profiles" />
   </ItemGroup>
   <ItemGroup>
     <DiagnosticsConfiguration Include="CS401WebAppContent\diagnostics.wadcfgx" />
+    <DiagnosticsConfiguration Include="OrderProcessingRoleContent\diagnostics.wadcfgx" />
+  </ItemGroup>
+  <ItemGroup>
+    <PublishProfile Include="Profiles\CS401WebAppProduction.azurePubxml" />
   </ItemGroup>
   <!-- Import the target files for this project template -->
   <PropertyGroup>

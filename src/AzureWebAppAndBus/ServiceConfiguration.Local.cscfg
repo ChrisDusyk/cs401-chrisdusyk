@@ -6,4 +6,11 @@
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
     </ConfigurationSettings>
   </Role>
+  <Role name="OrderProcessingRole">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Microsoft.ServiceBus.ConnectionString" value="Endpoint=sb://cs401queue-ns.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=9Og0KLwwAWspewHWzKvSS86qKGJsNbeouyEHi2TKovc=" />
+    </ConfigurationSettings>
+  </Role>
 </ServiceConfiguration>

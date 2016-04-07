@@ -7,6 +7,8 @@ Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "AzureWebAppAndBus", "AzureW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS401WebApp", "CS401WebApp\CS401WebApp.csproj", "{0C3F4C59-52FF-4A61-81C0-819853CEF0B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderProcessingRole", "OrderProcessingRole\OrderProcessingRole.csproj", "{BF8CB172-EA2D-48EA-B2FE-2F76D19E6C49}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{0C3F4C59-52FF-4A61-81C0-819853CEF0B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C3F4C59-52FF-4A61-81C0-819853CEF0B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C3F4C59-52FF-4A61-81C0-819853CEF0B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF8CB172-EA2D-48EA-B2FE-2F76D19E6C49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF8CB172-EA2D-48EA-B2FE-2F76D19E6C49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF8CB172-EA2D-48EA-B2FE-2F76D19E6C49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF8CB172-EA2D-48EA-B2FE-2F76D19E6C49}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
