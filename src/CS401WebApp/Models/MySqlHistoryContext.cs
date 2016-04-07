@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
+﻿using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.Migrations.History;
-using System.Linq;
-using System.Web;
 
 namespace CS401WebApp.Models
 {
@@ -12,7 +8,6 @@ namespace CS401WebApp.Models
 	{
 		public MySqlHistoryContext(DbConnection existingConnection, string defaultSchema) : base(existingConnection, defaultSchema)
 		{
-
 		}
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
