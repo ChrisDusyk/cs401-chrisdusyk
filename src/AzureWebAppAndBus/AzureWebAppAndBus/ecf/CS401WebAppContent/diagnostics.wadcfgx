@@ -8,6 +8,11 @@
         <Directories scheduledTransferPeriod="PT1M">
           <IISLogs containerName="wad-iis-logfiles" />
           <FailedRequestLogs containerName="wad-failedrequestlogs" />
+          <DataSources>
+            <DirectoryConfiguration containerName="netfx-install">
+              <LocalResource name="NETFXInstall" relativePath="log" />
+            </DirectoryConfiguration>
+          </DataSources>
         </Directories>
         <WindowsEventLog scheduledTransferPeriod="PT1M">
           <DataSource name="Application!*[System[(Level=1 or Level=2 or Level=3)]]" />

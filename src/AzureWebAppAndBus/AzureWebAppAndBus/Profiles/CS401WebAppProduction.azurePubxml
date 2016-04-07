@@ -18,5 +18,7 @@
     <AzureStorageAccountLabel>CS401WebApp</AzureStorageAccountLabel>
     <AzureStorageAccountName>cs401webapp</AzureStorageAccountName>
     <AzureAppendTimestampToDeploymentLabel>True</AzureAppendTimestampToDeploymentLabel>
+    <EnableRemoteDebugger>True</EnableRemoteDebugger>
+    <RemoteDebuggerConnectorCertificateThumbprint>E17ADE66ED7F7C53BB21AD47C692D738EE2C9CE8</RemoteDebuggerConnectorCertificateThumbprint>
   </PropertyGroup>
 </Project>
