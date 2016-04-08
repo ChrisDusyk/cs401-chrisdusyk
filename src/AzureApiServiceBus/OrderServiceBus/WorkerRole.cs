@@ -9,13 +9,14 @@ using Microsoft.ServiceBus;
 using Microsoft.ServiceBus.Messaging;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.ServiceRuntime;
+using OrderServiceBus.Models;
 
 namespace OrderServiceBus
 {
 	public class WorkerRole : RoleEntryPoint
 	{
 		// The name of your queue
-		const string QueueName = "ProcessingQueue";
+		const string QueueName = "cs401queue";
 
 		// QueueClient is thread-safe. Recommended that you cache 
 		// rather than recreating it on every request
@@ -33,6 +34,10 @@ namespace OrderServiceBus
 					{
 						// Process the message
 						Trace.WriteLine("Processing Service Bus message: " + receivedMessage.SequenceNumber.ToString());
+
+						// Parse the object from the message
+						PackagedOrder order = receivedMessage.GetBody<PackagedOrder>();
+						receivedMessage.Complete();
 					}
 					catch
 					{

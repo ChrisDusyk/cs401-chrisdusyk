@@ -3,8 +3,16 @@
   <Role name="OrderServiceBus">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
-      <Setting name="Microsoft.ServiceBus.ConnectionString" value="Endpoint=sb://[your namespace].servicebus.windows.net;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=[your key]" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=cs401servicebusservice;AccountKey=q3penoWcOeEh+rOK4adwWVHI53kdpgkFWUp1faSC6vRXlJs5fWrfNIARy+yna0XbGYfz1rO2paNd6YNWFuJjYQ==" />
+      <Setting name="Microsoft.ServiceBus.ConnectionString" value="Endpoint=sb://cs401queue-ns.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=9Og0KLwwAWspewHWzKvSS86qKGJsNbeouyEHi2TKovc=" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="chris.dusyk@directwest.com" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBjwYJKoZIhvcNAQcDoIIBgDCCAXwCAQAxggFAMIIBPAIBADAkMBAxDjAMBgNVBAMTBUNocmlzAhA/Px5Bn1CJo0z/8MYLnYZRMA0GCSqGSIb3DQEBAQUABIIBAGB5sOH/C8r8nv3LgWVJVFOZCJH7tg5txC5sx2GXJsX7V/2UADjdFp2zXsbE5tvdqr4BPUJJ1mV+sDz0uj35ebTmdRkNl2ejC3rBGKfPlHa0E4Auen3Ts7KiLuh7Go6T1mh43k1eLwIZ0hKPCFwPZvoI6GqFy7wRWcAgqCUkM9vYGig/lQ4UzMcyOWRkbn+vIQTRPCTC8Aqdq2BClSTib4puSl4Jr0R39J3ZatXFh/DzxZNMVQ3F0iFQqnZt+j0G/mi2K+zcs1vR8T78RmN5BWXiIYh8X5DUeQRaMZVlRg/sR9I1B39QRL+jJJxZ7OTPl9dyy0jmJlJXt35C1Q5W5cUwMwYJKoZIhvcNAQcBMBQGCCqGSIb3DQMHBAhxAamlSZSqtIAQAlJHldfIXVWV5+nl/RaXHA==" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2017-04-07T23:59:59.0000000-06:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
     </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="953AC6EA6B1434BE19008FCC5724BCC859ECFE1F" thumbprintAlgorithm="sha1" />
+    </Certificates>
   </Role>
 </ServiceConfiguration>

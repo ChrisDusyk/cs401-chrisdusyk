@@ -8,11 +8,13 @@ namespace AzureWebAppComponent.Controllers
 {
 	public class HomeController : Controller
 	{
+		[BasicAuth]
 		public ActionResult Index()
 		{
 			return View();
 		}
 
+		[BasicAuth]
 		public ActionResult About()
 		{
 			ViewBag.Message = "Your application description page.";
@@ -20,6 +22,7 @@ namespace AzureWebAppComponent.Controllers
 			return View();
 		}
 
+		[BasicAuth]
 		public ActionResult Contact()
 		{
 			ViewBag.Message = "Your contact page.";
