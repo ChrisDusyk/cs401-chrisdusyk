@@ -1,27 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Net;
-using System.Threading;
-using Microsoft.Azure;
+﻿using Microsoft.Azure;
 using Microsoft.ServiceBus;
 using Microsoft.ServiceBus.Messaging;
-using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using OrderServiceBus.Models;
+using System.Diagnostics;
+using System.Net;
+using System.Threading;
 
 namespace OrderServiceBus
 {
 	public class WorkerRole : RoleEntryPoint
 	{
 		// The name of your queue
-		const string QueueName = "cs401queue";
+		private const string QueueName = "cs401queue";
 
-		// QueueClient is thread-safe. Recommended that you cache 
+		// QueueClient is thread-safe. Recommended that you cache
 		// rather than recreating it on every request
-		QueueClient Client;
-		ManualResetEvent CompletedEvent = new ManualResetEvent(false);
+		private QueueClient Client;
+
+		private ManualResetEvent CompletedEvent = new ManualResetEvent(false);
 
 		public override void Run()
 		{
@@ -50,7 +47,7 @@ namespace OrderServiceBus
 
 		public override bool OnStart()
 		{
-			// Set the maximum number of concurrent connections 
+			// Set the maximum number of concurrent connections
 			ServicePointManager.DefaultConnectionLimit = 12;
 
 			// Create the queue if it does not exist already
