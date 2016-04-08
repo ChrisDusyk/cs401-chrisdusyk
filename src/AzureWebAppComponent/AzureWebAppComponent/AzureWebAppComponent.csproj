@@ -225,6 +225,7 @@
     <Compile Include="Models\OrderProduct.cs">
       <DependentUpon>AuroraContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderViewViewModel.cs" />
     <Compile Include="Models\PackagedOrder.cs" />
     <Compile Include="Models\Product.cs">
       <DependentUpon>AuroraContext.tt</DependentUpon>

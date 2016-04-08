@@ -17,5 +17,19 @@ namespace AzureWebAppComponent.Controllers
 
 			return View(await db.Orders.ToListAsync());
 		}
+
+		[BasicAuth]
+		public ActionResult Create()
+		{
+			return View();
+		}
+
+		[BasicAuth]
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<ActionResult> Create([Bind(Include = "OrderId,CreatedDate,CustomerId,SoldById")] Order order)
+		{
+			return View(order);
+		}
 	}
 }
