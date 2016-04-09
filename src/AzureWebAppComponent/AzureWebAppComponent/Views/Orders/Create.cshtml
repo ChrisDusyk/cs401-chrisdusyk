@@ -1,0 +1,31 @@
+﻿@model AzureWebAppComponent.Models.OrderViewViewModel
+
+@{
+	ViewBag.Title = "New Order";
+}
+
+<h2>New Order</h2>
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	<div class="form-horizontal">
+		<div class="form-group">
+			<div class="control-label col-md-2">
+				Customer:
+			</div>
+			<div class="col-md-10">
+				@Html.DropDownListFor(model => model.CustomerID, (SelectList)ViewBag.CustomerSelection, new { @class = "form-control" })
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="control-label col-md-2">
+				Product:
+			</div>
+			<div class="col-md-10">
+				@Html.DropDownListFor(model => model.ProductID, (SelectList)ViewBag.ProductSelection, new { @class = "form-control" })
+			</div>
+		</div>
+	</div>
+}

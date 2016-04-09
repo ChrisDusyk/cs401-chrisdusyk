@@ -1,4 +1,5 @@
-﻿using Microsoft.ServiceBus;
+﻿using Microsoft.Azure;
+using Microsoft.ServiceBus;
 using Microsoft.ServiceBus.Messaging;
 using System.Configuration;
 
@@ -6,7 +7,7 @@ namespace AzureWebAppComponent.Models
 {
 	public static class QueueConnector
 	{
-		private static string _connectionString = ConfigurationManager.AppSettings["ServiceBusConnectionString"];
+		private static string _connectionString = CloudConfigurationManager.GetSetting("ServiceBusConnectionString");
 
 		public static QueueClient Client;
 

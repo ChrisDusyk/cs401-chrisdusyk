@@ -21,12 +21,24 @@ namespace AzureWebAppComponent.Controllers
 		[BasicAuth]
 		public ActionResult Create()
 		{
-			OrderViewViewModel viewModel = new OrderViewViewModel();
-			viewModel.CustomerList = db.Customers.ToList();
-			viewModel.ProductList = db.Products.ToList();
-			viewModel.Order = new Order();
+			ViewBag.CustomerSelection = new SelectList(db.Customers
+				.AsEnumerable()
+				.Select(cust => new SelectListItem
+				{
+					Value = cust.CustomerID.ToString(),
+					Text = cust.CustomerName
+				})
+				.ToList(), "Value", "Text");
 
-			return View(viewModel);
+			ViewBag.ProductSelection = new SelectList(db.Products
+				.AsEnumerable()
+				.Select(prod => new SelectListItem
+				{
+					Value = prod.ProductID.ToString(),
+					Text = prod.ProductName
+				}).ToList(), "Value", "Text");
+
+			return View();
 		}
 
 		[BasicAuth]

@@ -13,7 +13,7 @@ namespace AzureWebAppComponent
 			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
 			BundleConfig.RegisterBundles(BundleTable.Bundles);
-			QueueConnector.Initialize();
+			//QueueConnector.Initialize();
 		}
 	}
 }
