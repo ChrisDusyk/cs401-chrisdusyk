@@ -13,15 +13,7 @@ namespace AzureWebAppComponent.Controllers
 		[BasicAuth]
 		public ActionResult About()
 		{
-			ViewBag.Message = "Your application description page.";
-
-			return View();
-		}
-
-		[BasicAuth]
-		public ActionResult Contact()
-		{
-			ViewBag.Message = "Your contact page.";
+			ViewBag.Message = "CS401";
 
 			return View();
 		}
