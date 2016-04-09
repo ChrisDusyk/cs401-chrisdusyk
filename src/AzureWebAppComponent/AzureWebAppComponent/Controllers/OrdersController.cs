@@ -21,7 +21,12 @@ namespace AzureWebAppComponent.Controllers
 		[BasicAuth]
 		public ActionResult Create()
 		{
-			return View();
+			OrderViewViewModel viewModel = new OrderViewViewModel();
+			viewModel.CustomerList = db.Customers.ToList();
+			viewModel.ProductList = db.Products.ToList();
+			viewModel.Order = new Order();
+
+			return View(viewModel);
 		}
 
 		[BasicAuth]
