@@ -31,7 +31,7 @@
 				Customer:
 			</div>
 			<div class="col-md-10">
-				@Html.DropDownListFor(model => model.CustomerID, (SelectList)ViewBag.CustomerSelection, new { @class = "form-control", @id = "customer-list" })
+				@Html.DropDownList("CustomerID", (SelectList)ViewBag.CustomerSelection, new { @class = "form-control", @id = "customer-list" })
 			</div>
 		</div>
 		<div class="form-group">
@@ -39,7 +39,7 @@
 				Products:
 			</div>
 			<div class="col-md-10">
-				@Html.DropDownListFor(model => model.Products, (SelectList)ViewBag.ProductSelection, new { @class = "form-control", @id = "product-list", @multiple = "multiple" })
+				@Html.DropDownList("ProductID", (MultiSelectList)ViewBag.ProductSelection, new { @class = "form-control", @id = "product-list", @multiple = "multiple" })
 			</div>
 		</div>
 		<div class="form-group">

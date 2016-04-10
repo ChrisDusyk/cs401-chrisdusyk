@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace AzureWebAppComponent.Models
 {
 	public class OrderViewViewModel
 	{
 		public int CustomerID { get; set; }
-		public List<OrderProductViewModel> Products { get; set; }
-		public Order Order { get; set; }
+		public int[] ProductID { get; set; }
 	}
 }

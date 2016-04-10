@@ -7,8 +7,7 @@ namespace AzureWebAppComponent.Models
 {
 	public class OrderProductViewModel
 	{
-		public int ProductID { get; set; }
-		public string ProductCode { get; set; }
-		public string Index { get; set; }
+		public int Value { get; set; }
+		public string Text { get; set; }
 	}
 }

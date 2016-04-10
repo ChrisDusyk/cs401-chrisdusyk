@@ -1,4 +1,7 @@
 ﻿using AzureWebAppComponent.Models;
+using Microsoft.AspNet.Identity;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,22 +24,7 @@ namespace AzureWebAppComponent.Controllers
 		[BasicAuth]
 		public ActionResult Create()
 		{
-			ViewBag.CustomerSelection = new SelectList(db.Customers
-				.AsEnumerable()
-				.Select(cust => new SelectListItem
-				{
-					Value = cust.CustomerID.ToString(),
-					Text = cust.CustomerName
-				})
-				.ToList(), "Value", "Text");
-
-			ViewBag.ProductSelection = new SelectList(db.Products
-				.AsEnumerable()
-				.Select(prod => new SelectListItem
-				{
-					Value = prod.ProductID.ToString(),
-					Text = prod.ProductName
-				}).ToList(), "Value", "Text");
+			PopulateViewBag();
 
 			return View();
 		}
@@ -44,18 +32,79 @@ namespace AzureWebAppComponent.Controllers
 		[BasicAuth]
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<ActionResult> Create([Bind(Include = "OrderId,CreatedDate,CustomerId,SoldById")] Order order)
+		public async Task<ActionResult> Create([Bind] OrderViewViewModel orderModel)
 		{
-			return View(order);
+			if (ModelState.IsValid)
+			{
+				Order order = new Order();
+				order.CustomerId = orderModel.CustomerID;
+				order.CreatedDate = DateTime.Now;
+
+				var currentUser = User.Identity.GetUserId();
+				var employee = db.Employees.First(emp => emp.AspNetUserID == currentUser);
+				order.SoldById = employee.EmployeeID;
+
+				db.Orders.Add(order);
+				db.SaveChanges();
+
+				foreach(int productID in orderModel.ProductID)
+				{
+					OrderProduct orderProduct = new OrderProduct();
+					orderProduct.OrderId = order.OrderId;
+					orderProduct.ProductId = productID;
+
+					db.OrderProducts.Add(orderProduct);
+				}
+
+				await db.SaveChangesAsync();
+				return RedirectToAction("Index");
+			}
+
+			PopulateViewBag(orderModel.ProductID);
+
+			return View(orderModel);
 		}
 
-		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-		public ActionResult AddProduct()
+		private void PopulateViewBag(int[] products = null)
 		{
-			var viewModel = new OrderViewViewModel();
-			viewModel.Products.Add(new OrderProductViewModel());
+			var customerSelection = db.Customers
+				.AsQueryable()
+				.Select(cust => new
+				{
+					CustomerID = cust.CustomerID,
+					CustomerName = cust.CustomerName
+				})
+				.ToList();
 
-			return View(viewModel);
+			ViewBag.CustomerSelection = new SelectList(customerSelection, "CustomerID", "CustomerName");
+
+			if (products == null)
+			{
+				var productSelection = db.Products
+				.AsQueryable()
+				.Select(prod => new
+				{
+					ProductID = prod.ProductID,
+					ProductName = prod.ProductName
+				})
+				.ToList();
+
+				ViewBag.ProductSelection = new MultiSelectList(productSelection, "ProductID", "ProductName");
+			}
+			else
+			{
+				var productSelection = db.Products
+				.AsQueryable()
+				.Select(prod => new
+				{
+					ProductID = prod.ProductID,
+					ProductName = prod.ProductName,
+					Selected = (products.Contains(prod.ProductID) ? true : false)
+				})
+				.ToList();
+
+				ViewBag.ProductSelection = new MultiSelectList(productSelection, "ProductID", "ProductName");
+			}
 		}
 	}
 }
