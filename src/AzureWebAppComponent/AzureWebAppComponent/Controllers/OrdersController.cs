@@ -48,5 +48,14 @@ namespace AzureWebAppComponent.Controllers
 		{
 			return View(order);
 		}
+
+		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		public ActionResult AddProduct()
+		{
+			var viewModel = new OrderViewViewModel();
+			viewModel.Products.Add(new OrderProductViewModel());
+
+			return View(viewModel);
+		}
 	}
 }

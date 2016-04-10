@@ -1,0 +1,7 @@
+﻿@model AzureWebAppComponent.Models.OrderViewViewModel
+
+@{ 
+	Layout = null;
+}
+
+@Html.EditorForMany(model => model.Products, model => model.Index)

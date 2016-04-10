@@ -4,6 +4,20 @@
 	ViewBag.Title = "New Order";
 }
 
+
+@section Scripts
+{
+	<link href="~/Content/css/select2.css" type="text/css" rel="stylesheet" />
+	<script src="~/Scripts/jquery-2.2.2.js"></script>
+	<script src="~/Scripts/select2.js"></script>
+
+	<script>
+		jQuery(document).ready(function ($) {
+			$('#product-list').select2();
+		});
+	</script>
+}
+
 <h2>New Order</h2>
 
 @using (Html.BeginForm())
@@ -21,10 +35,10 @@
 		</div>
 		<div class="form-group">
 			<div class="control-label col-md-2">
-				Product:
+				Products:
 			</div>
 			<div class="col-md-10">
-				@Html.DropDownListFor(model => model.ProductID, (SelectList)ViewBag.ProductSelection, new { @class = "form-control" })
+				@Html.DropDownListFor(model => model.Products, (SelectList)ViewBag.ProductSelection, new { @class = "form-control", @id = "product-list", @multiple = "multiple" })
 			</div>
 		</div>
 	</div>
