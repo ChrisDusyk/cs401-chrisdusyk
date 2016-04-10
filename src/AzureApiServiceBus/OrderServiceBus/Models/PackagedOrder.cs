@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using OrderServiceBus.Models;
+using System.Collections.Generic;
 
-namespace OrderServiceBus.Models
+namespace CS401DataContract
 {
 	public class PackagedOrder
 	{

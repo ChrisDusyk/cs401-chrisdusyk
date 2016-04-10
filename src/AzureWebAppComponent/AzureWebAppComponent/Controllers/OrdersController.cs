@@ -6,6 +6,9 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Microsoft.ServiceBus.Messaging;
+using Microsoft.ServiceBus;
+using CS401DataContract;
 
 namespace AzureWebAppComponent.Controllers
 {
@@ -36,6 +39,7 @@ namespace AzureWebAppComponent.Controllers
 		{
 			if (ModelState.IsValid)
 			{
+				// Unpack data from form and collect the necessary missing data
 				Order order = new Order();
 				order.CustomerId = orderModel.CustomerID;
 				order.CreatedDate = DateTime.Now;
@@ -44,19 +48,28 @@ namespace AzureWebAppComponent.Controllers
 				var employee = db.Employees.First(emp => emp.AspNetUserID == currentUser);
 				order.SoldById = employee.EmployeeID;
 
-				db.Orders.Add(order);
-				db.SaveChanges();
+				List<OrderProduct> orderProducts = new List<OrderProduct>();
 
 				foreach(int productID in orderModel.ProductID)
 				{
 					OrderProduct orderProduct = new OrderProduct();
-					orderProduct.OrderId = order.OrderId;
+					orderProduct.OrderId = -1;
 					orderProduct.ProductId = productID;
 
-					db.OrderProducts.Add(orderProduct);
+					orderProducts.Add(orderProduct);
 				}
 
-				await db.SaveChangesAsync();
+				// Create the PackagedOrder, which will be sent through the Service Bus to the API
+				PackagedOrder newOrder = new PackagedOrder();
+				newOrder.Order = order;
+				newOrder.OrderProducts = orderProducts;
+
+				// Create the message to be sent from the PackagedOrder
+				var message = new BrokeredMessage(newOrder);
+
+				// Asynchronously send the message to the Service Bus
+				await QueueConnector.Client.SendAsync(message);
+
 				return RedirectToAction("Index");
 			}
 

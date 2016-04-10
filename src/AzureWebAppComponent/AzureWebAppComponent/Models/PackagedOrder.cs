@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using AzureWebAppComponent.Models;
 
-namespace AzureWebAppComponent.Models
+namespace CS401DataContract
 {
 	public class PackagedOrder
 	{
