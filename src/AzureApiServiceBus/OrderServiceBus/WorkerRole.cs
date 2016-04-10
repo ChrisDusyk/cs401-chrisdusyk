@@ -9,6 +9,7 @@ using System.Net;
 using System.Threading;
 using System.Net.Mail;
 using CS401DataContract;
+using Newtonsoft.Json;
 
 namespace OrderServiceBus
 {
@@ -38,8 +39,10 @@ namespace OrderServiceBus
 						try
 						{
 							// Parse the object from the message
-							PackagedOrder order = receivedMessage.GetBody<PackagedOrder>();
+							string jsonOrder = receivedMessage.GetBody<string>();
 							receivedMessage.Complete();
+
+							PackagedOrder order = JsonConvert.DeserializeObject<PackagedOrder>(jsonOrder);
 
 							// Call the method to insert the data into the database
 							InsertPackagedOrder(order);

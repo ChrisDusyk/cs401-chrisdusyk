@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Microsoft.ServiceBus.Messaging;
 using Microsoft.ServiceBus;
 using CS401DataContract;
+using Newtonsoft.Json;
 
 namespace AzureWebAppComponent.Controllers
 {
@@ -64,8 +65,15 @@ namespace AzureWebAppComponent.Controllers
 				newOrder.Order = order;
 				newOrder.OrderProducts = orderProducts;
 
+				JsonSerializerSettings jsonSettings = new JsonSerializerSettings()
+				{
+					NullValueHandling = NullValueHandling.Include
+				};
+
+				string jsonOrder = JsonConvert.SerializeObject(newOrder, jsonSettings);
+
 				// Create the message to be sent from the PackagedOrder
-				var message = new BrokeredMessage(newOrder);
+				var message = new BrokeredMessage(jsonOrder);
 
 				// Asynchronously send the message to the Service Bus
 				await QueueConnector.Client.SendAsync(message);
