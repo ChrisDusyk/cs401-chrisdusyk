@@ -9,25 +9,27 @@
 
 namespace AzureWebAppComponent.Models
 {
-    using System;
-    using System.Collections.Generic;
-    
-    public partial class Order
-    {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Order()
-        {
-            this.OrderProducts = new HashSet<OrderProduct>();
-        }
-    
-        public int OrderId { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public Nullable<int> CustomerId { get; set; }
-        public Nullable<int> SoldById { get; set; }
-    
-        public virtual Customer Customer { get; set; }
-        public virtual Employee Employee { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderProduct> OrderProducts { get; set; }
-    }
+	using System;
+	using System.Collections.Generic;
+	using System.ComponentModel.DataAnnotations;
+	public partial class Order
+	{
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+		public Order()
+		{
+			this.OrderProducts = new HashSet<OrderProduct>();
+		}
+	
+		public int OrderId { get; set; }
+		[Display(Name = "Sold Date")]
+		public System.DateTime CreatedDate { get; set; }
+		public Nullable<int> CustomerId { get; set; }
+		public Nullable<int> SoldById { get; set; }
+	
+		public virtual Customer Customer { get; set; }
+		public virtual Employee Employee { get; set; }
+		[Display(Name = "Sold Products")]
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+		public virtual ICollection<OrderProduct> OrderProducts { get; set; }
+	}
 }

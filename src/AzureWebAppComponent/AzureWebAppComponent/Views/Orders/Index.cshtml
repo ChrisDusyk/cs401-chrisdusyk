@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-	@Html.ActionLink("Create New", "Create")
+	@Html.ActionLink("New Order", "Create", null, new { @class = "btn btn-primary" })
 </p>
 <table class="table">
 	<tr>
@@ -20,7 +20,9 @@
 		<th>
 			@Html.DisplayNameFor(model => model.Employee.FirstName)
 		</th>
-		<th></th>
+		<th>
+			@Html.DisplayNameFor(model => model.OrderProducts)
+		</th>
 	</tr>
 
 	@foreach (var item in Model)
@@ -36,8 +38,14 @@
 				@Html.DisplayFor(modelItem => item.Employee.FirstName)
 			</td>
 			<td>
-				@Html.ActionLink("Details", "Details", new { id = item.OrderId }) |
-				@Html.ActionLink("Delete", "Delete", new { id = item.OrderId })
+				<ul>
+					@foreach (var product in item.OrderProducts)
+					{
+						<li>
+							@Html.DisplayFor(productItem => product.Product.ProductName)
+						</li>
+					}
+				</ul>
 			</td>
 		</tr>
 	}
