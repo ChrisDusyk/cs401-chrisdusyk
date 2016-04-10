@@ -42,6 +42,11 @@ namespace OrderServiceBus
 							string jsonOrder = receivedMessage.GetBody<string>();
 							receivedMessage.Complete();
 
+							JsonSerializerSettings jsonSettings = new JsonSerializerSettings()
+							{
+								DateTimeZoneHandling = DateTimeZoneHandling.RoundtripKind
+							};
+
 							PackagedOrder order = JsonConvert.DeserializeObject<PackagedOrder>(jsonOrder);
 
 							// Call the method to insert the data into the database
@@ -92,8 +97,6 @@ namespace OrderServiceBus
 		{
 			try
 			{
-				SendTestMessage(packagedOrder);
-
 				// Create the database connection and context
 				// Since it's in a using-block, it will automatically dispose of the connection when it exits the block
 				using (CS401_DBEntities1 db = new CS401_DBEntities1())
@@ -131,31 +134,6 @@ namespace OrderServiceBus
 			message.From = new MailAddress("chris.dusyk@gmail.com", "Service Bus Error");
 			message.Subject = "Service Bus Error";
 			message.Text = ex.Message;
-
-			var transport = new SendGrid.Web("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");
-			transport.DeliverAsync(message).Wait();
-		}
-
-		private void SendTestMessage(PackagedOrder order)
-		{
-			var message = new SendGrid.SendGridMessage();
-			message.AddTo("chris.dusyk@gmail.com");
-			message.From = new MailAddress("chris.dusyk@gmail.com", "Service Bus Error");
-			message.Subject = "Service Bus Message";
-			message.Html =
-				"<table> "
-				+ " <tr>"
-				+ "    <th>OrderID</th>"
-				+ "    <th>CustomerID</th>"
-				+ "    <th>SoldByID</th>"
-				+ "    <th>OrderProducts</th>"
-				+ " </tr>"
-				+ " <tr>"
-				+ "    <td>" + order.Order.OrderId + "</td>"
-				+ "    <td>" + order.Order.CustomerId + "</td>"
-				+ "    <td>" + order.Order.SoldById + "</td>"
-				+ "    <td>" + order.OrderProducts.Count + "</td>"
-				+ " </tr></table>";
 
 			var transport = new SendGrid.Web("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");
 			transport.DeliverAsync(message).Wait();

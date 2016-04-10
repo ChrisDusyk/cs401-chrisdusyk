@@ -67,7 +67,8 @@ namespace AzureWebAppComponent.Controllers
 
 				JsonSerializerSettings jsonSettings = new JsonSerializerSettings()
 				{
-					NullValueHandling = NullValueHandling.Include
+					NullValueHandling = NullValueHandling.Include,
+					DateTimeZoneHandling = DateTimeZoneHandling.RoundtripKind
 				};
 
 				string jsonOrder = JsonConvert.SerializeObject(newOrder, jsonSettings);

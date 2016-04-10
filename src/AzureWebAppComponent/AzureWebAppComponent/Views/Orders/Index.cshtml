@@ -29,7 +29,7 @@
 	{
 		<tr>
 			<td>
-				@Html.DisplayFor(modelItem => item.CreatedDate)
+				@DateTime.Parse(Html.DisplayFor(modelItem => item.CreatedDate).ToString()).ToLocalTime().ToString()
 			</td>
 			<td>
 				@Html.DisplayFor(modelItem => item.Customer.CustomerName)
