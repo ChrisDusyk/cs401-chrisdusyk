@@ -42,11 +42,14 @@ namespace OrderServiceBus
 							string jsonOrder = receivedMessage.GetBody<string>();
 							receivedMessage.Complete();
 
+							// Handle timezone information. Client will send it in their local time. DateTimeZoneHandling.RoundtripKind maintains the timezone information in the DateTime 
+							// so it can be easily converted to the client's local time later on.
 							JsonSerializerSettings jsonSettings = new JsonSerializerSettings()
 							{
 								DateTimeZoneHandling = DateTimeZoneHandling.RoundtripKind
 							};
 
+							// Deserialize JSON dictionary of PackagedOrder object
 							PackagedOrder order = JsonConvert.DeserializeObject<PackagedOrder>(jsonOrder);
 
 							// Call the method to insert the data into the database
@@ -93,6 +96,10 @@ namespace OrderServiceBus
 			base.OnStop();
 		}
 
+		/// <summary>
+		/// Insert the Order and OrderProducts into the database.
+		/// </summary>
+		/// <param name="packagedOrder">PackagedOrder object received from the Service Bus.</param>
 		private void InsertPackagedOrder(PackagedOrder packagedOrder)
 		{
 			try
@@ -127,6 +134,10 @@ namespace OrderServiceBus
 			}
 		}
 
+		/// <summary>
+		/// Send an error report email to me, for debugging issues for the project.
+		/// </summary>
+		/// <param name="ex">Exception caught by the try-catch block.</param>
 		private void SendErrorMessage(Exception ex)
 		{
 			var message = new SendGrid.SendGridMessage();

@@ -45,6 +45,7 @@ namespace AzureWebAppComponent.Controllers
 				order.CustomerId = orderModel.CustomerID;
 				order.CreatedDate = DateTime.Now;
 
+				// Get the employee object attached to the logged in user
 				var currentUser = User.Identity.GetUserId();
 				var employee = db.Employees.First(emp => emp.AspNetUserID == currentUser);
 				order.SoldById = employee.EmployeeID;
@@ -65,12 +66,15 @@ namespace AzureWebAppComponent.Controllers
 				newOrder.Order = order;
 				newOrder.OrderProducts = orderProducts;
 
+				// Handle timezone information. Client will send it in their local time. DateTimeZoneHandling.RoundtripKind maintains the timezone information in the DateTime 
+				// so it can be easily converted to the client's local time later on.
 				JsonSerializerSettings jsonSettings = new JsonSerializerSettings()
 				{
 					NullValueHandling = NullValueHandling.Include,
 					DateTimeZoneHandling = DateTimeZoneHandling.RoundtripKind
 				};
 
+				// Serialize the PackagedOrder to JSON to send in the Service Bus
 				string jsonOrder = JsonConvert.SerializeObject(newOrder, jsonSettings);
 
 				// Create the message to be sent from the PackagedOrder
@@ -87,6 +91,10 @@ namespace AzureWebAppComponent.Controllers
 			return View(orderModel);
 		}
 
+		/// <summary>
+		/// Add DropDownList data to the ViewBag so it can be presented on the View.
+		/// </summary>
+		/// <param name="products">If the same View needs to be displayed, this array represents the products that the user had selected before.</param>
 		private void PopulateViewBag(int[] products = null)
 		{
 			var customerSelection = db.Customers
