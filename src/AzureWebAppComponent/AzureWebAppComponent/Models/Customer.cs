@@ -9,27 +9,25 @@
 
 namespace AzureWebAppComponent.Models
 {
-	using System;
-	using System.Collections.Generic;
-	using System.ComponentModel.DataAnnotations;
-	public partial class Customer
-	{
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-		public Customer()
-		{
-			this.Orders = new HashSet<Order>();
-		}
-	
-		public int CustomerID { get; set; }
-		[Display(Name = "Customer Name")]
-		public string CustomerName { get; set; }
-		public string Address { get; set; }
-		public string City { get; set; }
-		public string Province { get; set; }
-		[Display(Name = "Postal Code")]
-		public string PostalCode { get; set; }
-	
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-		public virtual ICollection<Order> Orders { get; set; }
-	}
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class Customer
+    {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Customer()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+    
+        public int CustomerID { get; set; }
+        public string CustomerName { get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string Province { get; set; }
+        public string PostalCode { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
+    }
 }
